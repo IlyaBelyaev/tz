@@ -33,6 +33,8 @@ module.exports = class Server{
         res.send(await this.getUserByFirstAndLastName(firstName, lastName))
       } else if (firstName){
         res.send(await this.getUserByFirstName(firstName));
+      } else if (lastName){
+        res.send(await this.getUserByLastName(lastName));
       } else {
         res.send([]);
       }
@@ -70,8 +72,12 @@ module.exports = class Server{
       });
   }
 
+  async getUserByLastName(lastName){
+    return this.db.getUserBy('last_name', lastName);
+  }
+
   async getUserByFirstName(firstName){
-    return this.db.getUserByFirstName(firstName);
+    return this.db.getUserBy('first_name', firstName);
   }
 
   async getUserByFirstAndLastName(firstName, lastName){

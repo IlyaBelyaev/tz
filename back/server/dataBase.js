@@ -17,19 +17,19 @@ module.exports = class DataBase {
     return this.request(sql, [[id, email, first_name, last_name, avatar]]);
   }
 
-  async getUserByFirstName(firstName){
-    let sql = 'SELECT * FROM users WHERE first_name = ?';
+  async getUserBy(key, value){
+    let sql = `SELECT * FROM users WHERE ${key} = ?`;
 
-    return this.request(sql, [firstName]);
+    return await this.request(sql, [value]);
   }
 
   async getUserByFirstAndLastName(firstName, lastName){
     let sql = 'SELECT * FROM users WHERE first_name = ? AND last_name = ?';
-    return this.request(sql, [firstName, lastName]);
+    return await this.request(sql, [firstName, lastName]);
   }
 
   async request(sql, data) {
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       this.connection.query(sql, data, function (error, results, fields) {
         if (error) reject(error);
         resolve(results);
