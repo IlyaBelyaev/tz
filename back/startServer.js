@@ -1,5 +1,8 @@
 const Server = require('./server');
 
-server = new Server();
+(async () => {
+  let server = new Server();
+  await server.init();
 
-server.start();
+  server.start();
+})();

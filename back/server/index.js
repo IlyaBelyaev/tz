@@ -10,7 +10,9 @@ module.exports = class Server{
     this.status = 0;
 
     this.app = express();
+  }
 
+  async init(){
     this.updateUsers();
     this.initUserUpdateInterval();
     this.initRoutes();
@@ -55,12 +57,9 @@ module.exports = class Server{
     }
   }
 
-  async start(){
-    return new Promise((resolve, reject) => {
-      this.app.listen(config.port, () => {
-        this.setStatus('running');
-        resolve();
-      });
+  start(){
+    this.app.listen(config.port, () => {
+      this.setStatus('running');
     });
   }
 

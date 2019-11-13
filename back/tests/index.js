@@ -10,7 +10,9 @@ describe('server', () => {
   before(async function () {
     server = new Server();
 
-    await server.start();
+    await server.init();
+
+    server.start();
   });
 
   it('should start server', async function () {
